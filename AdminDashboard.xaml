@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="LecturerClaimsSystem2.AdminDashboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid Background="#FF2D2D30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#FF252526" Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="DashboardTitle" Grid.Column="0" Text="Admin Dashboard" 
+                           Foreground="White" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Text="Review and approve claims" Foreground="LightGray" 
+                           Margin="20,0,0,0" VerticalAlignment="Center"/>
+                <Button Grid.Column="2" Content="Logout" Background="#FF007ACC" Foreground="White" 
+                        Padding="10,5" Click="LogoutButton_Click"/>
+            </Grid>
+        </Border>
+
+        <TabControl Grid.Row="1" Background="Transparent">
+            <TabItem Header="Pending Claims">
+                <ScrollViewer>
+                    <StackPanel Margin="20">
+                        <TextBlock Text="Pending Claims for Approval" Foreground="White" FontSize="16" 
+                                   FontWeight="Bold" Margin="0,0,0,20"/>
+
+                        <ListView x:Name="ClaimsListView" Background="#FF1E1E1E" Foreground="White" BorderThickness="0" Height="300">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Lecturer" Width="120" DisplayMemberBinding="{Binding Lecturer}"/>
+                                    <GridViewColumn Header="Hours" Width="60" DisplayMemberBinding="{Binding Hours}"/>
+                                    <GridViewColumn Header="Rate" Width="80" DisplayMemberBinding="{Binding Rate}"/>
+                                    <GridViewColumn Header="Total" Width="80" DisplayMemberBinding="{Binding Total}"/>
+                                    <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding Status}"/>
+                                    <GridViewColumn Header="Actions" Width="150">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Content="Approve" Background="Green" Foreground="White" 
+                                                            Padding="5,2" Margin="0,0,5,0" Click="Approve_Click"/>
+                                                    <Button Content="Reject" Background="Red" Foreground="White" 
+                                                            Padding="5,2" Click="Reject_Click"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="Approved Claims">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Approved Claims History" Foreground="White" FontSize="16" 
+                               FontWeight="Bold" Margin="0,0,0,20"/>
+
+                    <ListView x:Name="ApprovedClaimsListView" Background="#FF1E1E1E" Foreground="White" BorderThickness="0" Height="300">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Lecturer" Width="120" DisplayMemberBinding="{Binding Lecturer}"/>
+                                <GridViewColumn Header="Date" Width="100" DisplayMemberBinding="{Binding Date}"/>
+                                <GridViewColumn Header="Hours" Width="60" DisplayMemberBinding="{Binding Hours}"/>
+                                <GridViewColumn Header="Total" Width="80" DisplayMemberBinding="{Binding Total}"/>
+                                <GridViewColumn Header="Approved By" Width="120" DisplayMemberBinding="{Binding ApprovedBy}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+        
+        
+    </Grid>
+</UserControl>
